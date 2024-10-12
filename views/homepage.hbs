@@ -1,0 +1,37 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>K-Drama Recommendations</title>
+  </head>
+
+  <body>
+    <div>
+      <h1>Welcome, {{username}}!</h1>
+      <div
+        class="navigation"
+        style="display: flex; justify-content: space-between; margin-top: 20px;"
+      >
+        <div class="profile-link">
+          <a href="/dramas/profile">Go to Profile</a>
+        </div>
+
+        <div class="show-all-dramas">
+          <a href="/dramas/all-dramas">Show All Dramas</a>
+        </div>
+      </div>
+
+      <p>Here are some K-Dramas based on your preferences:</p>
+      <ul class="drama-list">
+        {{#each dramas}}
+          <li>
+            <a href="/dramas/{{this.name}}">{{this.name}} ({{this.year}})</a>
+          </li>
+        {{/each}}
+      </ul>
+
+    </div>
+  </body>
+
+</html>

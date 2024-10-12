@@ -1,0 +1,37 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Dramas</title>
+  </head>
+
+  <body>
+    <h1>All K-Dramas</h1>
+
+    <!-- Genre Search Form -->
+    <form method="GET" action="/dramas/all-dramas">
+      <label for="search">Search by Genre:</label>
+      <input
+        type="text"
+        id="search"
+        name="genre"
+        placeholder="Enter genre..."
+      />
+      <button type="submit">Search</button>
+    </form>
+
+    <ul>
+      {{#each dramas}}
+        <li>
+          <a href="/dramas/{{this.name}}">{{this.name}} ({{this.year}})</a>
+        </li>
+      {{else}}
+        <li>No dramas available.</li>
+      {{/each}}
+    </ul>
+
+    <a href="/dramas/home">← Back to Home</a>
+  </body>
+
+</html>

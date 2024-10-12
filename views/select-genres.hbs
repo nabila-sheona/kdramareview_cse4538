@@ -1,0 +1,43 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Your Favorite Genres</title>
+    <style>
+      body { font-family: Arial, sans-serif; } .genre-list { list-style-type:
+      none; } .genre-list li { margin: 10px 0; }
+    </style>
+  </head>
+
+  <body>
+    <h1>Select Your Favorite Genres</h1>
+    <form action="/auth/select-genres" method="POST">
+      <input type="hidden" name="username" value="{{username}}" />
+
+      <p>Select at least 3 genres:</p>
+      <ul class="genre-list">
+        <li><input type="checkbox" name="genres" value="Action" /> Action</li>
+        <li><input type="checkbox" name="genres" value="Romance" /> Romance</li>
+        <li><input type="checkbox" name="genres" value="Comedy" /> Comedy</li>
+        <li><input type="checkbox" name="genres" value="Thriller" />
+          Thriller</li>
+        <li><input type="checkbox" name="genres" value="Drama" /> Drama</li>
+        <li><input type="checkbox" name="genres" value="Fantasy" /> Fantasy</li>
+        <li><input type="checkbox" name="genres" value="Sci-Fi" /> Sci-Fi</li>
+        <li><input type="checkbox" name="genres" value="Horror" /> Horror</li>
+        <li><input type="checkbox" name="genres" value="Mystery" /> Mystery</li>
+        <li><input type="checkbox" name="genres" value="Legal" /> Legal</li>
+        <li><input type="checkbox" name="genres" value="Historical" />
+          Historical</li>
+        <li><input type="checkbox" name="genres" value="Crime" /> Crime</li>
+        <li><input type="checkbox" name="genres" value="Adventure" />
+          Adventure</li>
+
+      </ul>
+
+      <button type="submit">Save Genres</button>
+    </form>
+  </body>
+
+</html>

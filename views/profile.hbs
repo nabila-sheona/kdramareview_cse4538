@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{username}}'s Profile</title>
+</head>
+
+<body>
+    <h1>{{username}}'s Profile</h1>
+
+    <h2>Genres</h2>
+    <form method="POST" action="/dramas/update-genres">
+        <h3>Select Your Favorite Genres (at least 3)</h3>
+        <ul>
+            <li><input type="checkbox" name="genres" value="Action" {{#if (arrayContains userGenres "Action")}}checked{{/if}}> Action</li>
+            <li><input type="checkbox" name="genres" value="Romance" {{#if (arrayContains userGenres "Romance")}}checked{{/if}}> Romance</li>
+            <li><input type="checkbox" name="genres" value="Comedy" {{#if (arrayContains userGenres "Comedy")}}checked{{/if}}> Comedy</li>
+            <li><input type="checkbox" name="genres" value="Thriller" {{#if (arrayContains userGenres "Thriller")}}checked{{/if}}> Thriller</li>
+            <li><input type="checkbox" name="genres" value="Drama" {{#if (arrayContains userGenres "Drama")}}checked{{/if}}> Drama</li>
+            <li><input type="checkbox" name="genres" value="Fantasy" {{#if (arrayContains userGenres "Fantasy")}}checked{{/if}}> Fantasy</li>
+            <li><input type="checkbox" name="genres" value="Sci-Fi" {{#if (arrayContains userGenres "Sci-Fi")}}checked{{/if}}> Sci-Fi</li>
+            <li><input type="checkbox" name="genres" value="Horror" {{#if (arrayContains userGenres "Horror")}}checked{{/if}}> Horror</li>
+            <li><input type="checkbox" name="genres" value="Mystery" {{#if (arrayContains userGenres "Mystery")}}checked{{/if}}> Mystery</li>
+            <li><input type="checkbox" name="genres" value="Historical" {{#if (arrayContains userGenres "Historical")}}checked{{/if}}> Historical</li>
+            <li><input type="checkbox" name="genres" value="Adventure" {{#if (arrayContains userGenres "Adventure")}}checked{{/if}}> Adventure</li>
+        </ul>
+        <button type="submit">Update Genres</button>
+    </form>
+
+    <h2>Wishlist</h2>
+    {{#if wishlist.length}}
+        <ul>
+            {{#each wishlist}}
+                <li>
+                    {{this}}
+                    <!-- Form to remove from wishlist -->
+                    <form method="POST" action="/dramas/remove-from-wishlist" style="display:inline;">
+                        <input type="hidden" name="dramaName" value="{{this}}" />
+                        <button type="submit">Remove</button>
+                    </form>
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No dramas in your wishlist.</p>
+    {{/if}}
+
+    <h2>Watching</h2>
+    {{#if watching.length}}
+        <ul>
+            {{#each watching}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>You are not watching any dramas currently.</p>
+    {{/if}}
+
+    <h2>Watched</h2>
+    {{#if watched.length}}
+        <ul>
+            {{#each watched}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>You have not watched any dramas yet.</p>
+    {{/if}}
+
+    <a href="/dramas/home">← Back to Home</a>
+
+    <!-- Logout Button -->
+    <a href="/auth/logout" style="display:inline-block; padding:10px; background-color:#f44336; color:white; text-decoration:none; border-radius:5px;">Logout</a>
+</body>
+
+</html>

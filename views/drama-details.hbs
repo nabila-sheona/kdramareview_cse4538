@@ -1,0 +1,113 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{drama.name}} - Details</title>
+    <style>
+      .status-buttons form { display: inline-block; margin-right: 10px; } h2 {
+      margin-top: 20px; }
+    </style>
+  </head>
+
+  <body>
+    <h1>{{drama.name}}</h1>
+    <p><strong>Year:</strong> {{drama.year}}</p>
+    <p><strong>Genres:</strong> {{drama.genres}}</p>
+    <p><strong>Description:</strong> {{drama.review}}</p>
+    <!-- Added description -->
+
+    <div class="status-buttons">
+      <!-- Form to add to Wishlist -->
+      <form method="POST" action="/dramas/{{drama.name}}/add-to-wishlist">
+        {{#if isInWishlist}}
+          <button type="submit" disabled>In Wishlist</button>
+        {{else}}
+          <button type="submit">Add to Wishlist</button>
+        {{/if}}
+      </form>
+
+      <!-- Form to mark as Watching -->
+      <form method="POST" action="/dramas/{{drama.name}}/mark-as-watching">
+        {{#if isWatching}}
+          <button type="submit" disabled>Currently Watching</button>
+        {{else}}
+          <button type="submit">Mark as Watching</button>
+        {{/if}}
+      </form>
+
+      <!-- Form to mark as Watched -->
+      <form method="POST" action="/dramas/{{drama.name}}/mark-as-watched">
+        {{#if isWatched}}
+          <button type="submit" disabled>Already Watched</button>
+        {{else}}
+          <button type="submit">Mark as Watched</button>
+        {{/if}}
+      </form>
+    </div>
+
+    {{#if userReview}}
+      <!-- If the user has already reviewed this drama, show the edit form -->
+      <h2>Edit Your Review</h2>
+      <form method="POST" action="/dramas/{{drama.name}}/add-review">
+        <input type="hidden" name="username" value="{{username}}" />
+        <label for="review">Your Review:</label>
+        <input
+          type="text"
+          id="review"
+          name="review"
+          value="{{userReview.review}}"
+          required
+        />
+        <br />
+        <label for="rating">Rating (1-5):</label>
+        <input
+          type="number"
+          id="rating"
+          name="rating"
+          value="{{userReview.rating}}"
+          min="1"
+          max="5"
+          required
+        />
+        <br />
+        <button type="submit">Update Review</button>
+      </form>
+    {{else}}
+      <!-- If the user has not reviewed this drama, show the form to add a review -->
+      <h2>Add Your Review</h2>
+      <form method="POST" action="/dramas/{{drama.name}}/add-review">
+        <input type="hidden" name="username" value="{{username}}" />
+        <label for="review">Your Review:</label>
+        <input type="text" id="review" name="review" required />
+        <br />
+        <label for="rating">Rating (1-5):</label>
+        <input
+          type="number"
+          id="rating"
+          name="rating"
+          min="1"
+          max="5"
+          required
+        />
+        <br />
+        <button type="submit">Submit Review</button>
+      </form>
+    {{/if}}
+
+    <h2>All Reviews</h2>
+    <ul>
+      {{#each allReviews}}
+        <li><strong>{{this.user}}:</strong>
+          {{this.review}}
+          (Rating:
+          {{this.rating}}/5)</li>
+      {{else}}
+        <li>No reviews yet.</li>
+        <!-- Message if no reviews exist -->
+      {{/each}}
+    </ul>
+
+    <a href="/dramas/home">← Back to Home</a>
+  </body>
+
+</html>
